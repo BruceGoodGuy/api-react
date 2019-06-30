@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AddProduct from './../../components/Product/add';
 import {connect} from 'react-redux';
-import {addProduct} from './../../actions/index'
+import {addProduct} from './../../actions'
 
 class ProductActionPage extends Component {
   render(){

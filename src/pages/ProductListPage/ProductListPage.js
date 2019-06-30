@@ -4,25 +4,15 @@ import ProductItem from './../../components/Product/productItem';
 import NoData from './../../components/NotFound/NoData';
 import Table from './../../components/Table';
 import {connect} from 'react-redux';
-import callAPI from './../../utils/apiCaller';
+import {getData} from './../../actions/index';
 class ProductListPage extends Component {
-  constructor (props){
-    super(props);
-    this.state = {
-      products: []
-    }
-  }
 
   componentDidMount(){
-    callAPI('products', 'GET', null).then(res=>{
-      this.setState({
-        products: res.data
-      })
-    })
+    this.props.getData();
   }
 
   render(){
-    var {products} = this.state;
+    var {products} = this.props;
     return (
         <div>
           <ProductList>
@@ -57,4 +47,8 @@ const maptStateToProps = state => {
     }
 }
 
-export default connect(maptStateToProps, null)(ProductListPage);
+const mapPropsToState = (dispatch, props) => {
+  return {getData: () => dispatch(getData(dispatch))}
+}
+
+export default connect(maptStateToProps, mapPropsToState)(ProductListPage);
